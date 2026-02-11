@@ -68,6 +68,8 @@ public class App {
         // Initialize years with dummy values
         int startYear = -1;
         int endYear = -1;
+        int correct = 0;
+        int total = 0;
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -99,20 +101,24 @@ public class App {
                 }
             }
 
-            int correct = randomDate.getDayOfWeek().getValue();
+            int actual = randomDate.getDayOfWeek().getValue();
 
-            if (guess == correct) {
-                System.out.println("Bingo!");
+            if (guess == actual) {
+                System.out.println("Bingo!\n");
+                correct += 1;
             } else {
-                System.out.println("Sorry! The answer was " + correct + " ("
-                        + sentenceCase(randomDate.getDayOfWeek().toString()) + ").");
+                System.out.println("Sorry! The answer was " + actual + " ("
+                        + sentenceCase(randomDate.getDayOfWeek().toString()) + ").\n");
             }
+
+            total += 1;
 
             System.out.print("Wanna try another one? Press q or n to quit and anything else to continue: ");
             String contStr = sc.nextLine().trim().toLowerCase();
             char cont = contStr.isEmpty() ? '\n' : contStr.charAt(0);
 
             if (cont == 'q' || cont == 'n') {
+                System.out.println("You got " + correct + " out of " + total + " correct.");
                 break;
             }
         }
